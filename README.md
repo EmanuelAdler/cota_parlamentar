@@ -4,7 +4,7 @@ Baseado [neste](https://www.kaggle.com/joniarroba/how-brazilian-politicians-use-
 
 **Perguntas a serem respondidas:**
 1. Existe alguma correlação entre gastos e assiduidade em eventos da casa? 
-2. Entre os 100 congressistas que mais gastaram, quantos foram reeleitos? E entre os 20 que mais gastaram? 
+2. Entre os 30 congressistas que mais gastaram, quantos foram reeleitos? 
 3. Nível de educação tem alguma relação com o nível de gastos? 
 4. Qual partido gasta mais, proporcionalmente? 
 5. Existe alguma correlação entre gastos e quantidade de propostas? 
