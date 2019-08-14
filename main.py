@@ -1,5 +1,6 @@
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import matplotlib.pyplot as plt # plot graphs
 
 #df = pd.read_csv('Gastos-Quota-Parlamentar.csv', dtype={'reimbursement_numbers': object})
 df = pd.read_csv('2015-2019.csv')
@@ -10,7 +11,7 @@ df = df.drop(columns=['nuCarteiraParlamentar', 'codLegislatura', 'txtFornecedor'
                       'vlrDocumento', 'vlrGlosa', 'numParcela', 'txtTrecho', 'numLote'])
 list(df.columns)
 #Selecting years we will use
-years = [2015]
+years = [2015, 2016, 2017, 2018]
 #Filtering dataset with years
 df1 = df[df.numAno.isin(years)]
 
@@ -27,3 +28,5 @@ df2 = df2.sort_values(['avg'], ascending=False)
 df2.plot.bar(y = 'avg', legend=False)
 
 print (df2)
+
+plt.show()
