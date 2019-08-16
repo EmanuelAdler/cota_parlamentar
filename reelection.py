@@ -1,28 +1,23 @@
-import numpy as np # linear algebra
+# -*- coding: utf-8 -*-
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
-import matplotlib.pyplot as plt # plot graphs
 
-#df = pd.read_csv('Gastos-Quota-Parlamentar.csv', dtype={'reimbursement_numbers': object})
 df = pd.read_csv('2015-2019.csv')
-#Dropping unnecessary columns
-#df = df.drop(columns=['congressperson_document', 'term_id', 'supplier', 'cnpj_cpf', 'document_number', 'document_type', 'document_value', 'remark_value', 'installment', 'passenger', 'leg_of_the_trip', 'batch_number'])
 df = df.drop(columns=['nuCarteiraParlamentar', 'codLegislatura', 'txtFornecedor', 
                       'txtCNPJCPF', 'nuCarteiraParlamentar', 'indTipoDocumento', 
                       'vlrDocumento', 'vlrGlosa', 'numParcela', 'txtTrecho', 'numLote'])
-list(df.columns)
-#Selecting years we will use
+#We want to get the top spenders from 2015 to 2018
 years = [2015, 2016, 2017, 2018]
 #Filtering dataset with years
 df1 = df[df.numAno.isin(years)]
 
-partySpendings = df1.groupby(['sgPartido'])['vlrLiquido'].sum()
-congressPersonTotal = df1.groupby(['sgPartido'])['ideCadastro'].nunique()
+congressPersons = df1.groupby(['ideCadastro', 'txNomeParlamentar'])['vlrLiquido'].sum().to_frame(name = 'valor').reset_index()
+congressPersons = congressPersons.sort_values(['valor'], ascending=False)
+congressPersons = congressPersons.astype({"ideCadastro": int})
 
-# usando o to_frame() pois o metodo merge exige que seja um dataframe e nao uma serie
-df2 = pd.merge(partySpendings.to_frame(), congressPersonTotal.to_frame(), on='sgPartido')
+print(congressPersons.head(30))
 
-#df2['avg'] = df2[['net_values', 'congressperson_id']].mean(axis=1)
-df2['avg'] = df2['vlrLiquido']/df2['ideCadastro']
+df2 = df[df.numAno.isin([2019])]
 
-df2 = df2.sort_values(['avg'], ascending=False)
-df2.plot.bar(y = 'avg', legend=False)
+# https://stackoverflow.com/questions/50449088/check-if-value-from-one-dataframe-exists-in-another-dataframe
+#topValues.ideCadastro.isin(df2.ideCadastro).astype(bool)
+#print(pd.Series(topValues.ideCadastro.isin(df2.ideCadastro).values.astype(bool), topValues.ideCadastro.values))
