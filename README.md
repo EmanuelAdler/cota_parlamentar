@@ -1,11 +1,11 @@
 # Cotas parlamentares no Brasil: uma análise com Teoria dos Jogos
 
-Baseado [neste](https://www.kaggle.com/joniarroba/how-brazilian-politicians-use-their-quota#Gastos-Quota-Parlamentar.csv) dataset. 
+Dados retirados da plataforma de dados abertos da Câmara dos Deputados, disponíveis neste [link](https://dadosabertos.camara.leg.br/swagger/api.html). 
 
 **Perguntas a serem respondidas:**
 1. Existe alguma correlação entre gastos e assiduidade em eventos da casa? 
-2. Entre os 30 congressistas que mais gastaram, quantos foram reeleitos? 
-3. Nível de educação tem alguma relação com o nível de gastos? 
+2. Entre os 30 congressistas que mais gastaram no país, quantos foram reeleitos? 
+3. Dentre os estados da federação, os quatro congressistas que mais gastaram foram reeleitos? 
 4. Qual partido gasta mais, proporcionalmente? 
 5. Existe alguma correlação entre gastos e quantidade de propostas? 
 
