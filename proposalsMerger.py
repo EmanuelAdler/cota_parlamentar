@@ -3,7 +3,7 @@
 import pandas as pd
 def mergeFiles(startYear, endYear):
     for year in range(startYear, endYear+1):
-        filename = 'proposicoes-' + str(year) + '.csv'
+        filename = 'proposicoesAutores-' + str(year) + '.csv'
         print(filename)
         if(year == startYear):
             df = pd.read_csv(filename, sep=';')
