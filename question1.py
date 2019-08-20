@@ -1,3 +1,4 @@
+#1- Existe alguma correlação entre gastos e assiduidade em eventos da casa?
 # -*- coding: utf-8 -*-
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import matplotlib.pyplot as plt # plot graphs
@@ -14,6 +15,6 @@ output = pd.merge(eventsCount, congressPersons, on='idDeputado')
 
 ax1 = output.plot.scatter(x='valorGasto', y='quantidadeEventos', c='DarkBlue')
 
-plt.show()
-
 print (output['valorGasto'].corr(output['quantidadeEventos']))
+
+plt.show()

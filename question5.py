@@ -1,3 +1,4 @@
+#5- Existe alguma correlação entre gastos e quantidade de propostas?
 # -*- coding: utf-8 -*-
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import matplotlib.pyplot as plt # plot graphs
@@ -15,6 +16,6 @@ output = pd.merge(proposalsCount, congressPersons, on='idDeputadoAutor')
 
 ax1 = output.plot.scatter(x='valorGasto', y='quantidadePropostas', c='DarkBlue')
 
-plt.show()
-
 print (output['valorGasto'].corr(output['quantidadePropostas']))
+
+plt.show()
