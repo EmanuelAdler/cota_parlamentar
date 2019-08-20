@@ -16,3 +16,5 @@ output = pd.merge(proposalsCount, congressPersons, on='idDeputadoAutor')
 ax1 = output.plot.scatter(x='valorGasto', y='quantidadePropostas', c='DarkBlue')
 
 plt.show()
+
+print (output['valorGasto'].corr(output['quantidadePropostas']))

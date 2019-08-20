@@ -15,3 +15,5 @@ output = pd.merge(eventsCount, congressPersons, on='idDeputado')
 ax1 = output.plot.scatter(x='valorGasto', y='quantidadeEventos', c='DarkBlue')
 
 plt.show()
+
+print (output['valorGasto'].corr(output['quantidadeEventos']))
