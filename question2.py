@@ -1,6 +1,8 @@
 #2- Entre os 30 congressistas que mais gastaram no país, quantos foram reeleitos?
 # -*- coding: utf-8 -*-
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import locale
+locale.setlocale(locale.LC_ALL, 'pt_br.utf-8')
 
 df = pd.read_csv('2015-2019.csv')
 df = df.drop(columns=['nuCarteiraParlamentar', 'codLegislatura', 'txtFornecedor', 
@@ -11,7 +13,7 @@ years = [2015, 2016, 2017, 2018]
 #Filtering dataset with years
 df1 = df[df.numAno.isin(years)]
 
-congressPersons = df1.groupby(['ideCadastro', 'txNomeParlamentar'])['vlrLiquido'].sum().to_frame(name = 'valor').reset_index()
+congressPersons = df1.groupby(['ideCadastro', 'txNomeParlamentar', 'sgUF'])['vlrLiquido'].sum().to_frame(name = 'valor').reset_index()
 congressPersons = congressPersons.sort_values(['valor'], ascending=False)
 congressPersons = congressPersons.astype({"ideCadastro": int})
 
@@ -29,9 +31,12 @@ reelected.columns = ['ideCadastro','Reeleito?']
 reelected = pd.merge(reelected, congressPersons, on='ideCadastro')
 
 #Making tratment for column names
-reelected.rename(columns={'ideCadastro':'ID de Cadastro', 'txNomeParlamentar':'Nome do Parlamentar', 'valor':'Valor Total Gasto'}, 
+reelected.rename(columns={'ideCadastro':'ID de Cadastro', 'txNomeParlamentar':'Nome do Parlamentar', 'sgUF': 'Estado', 'valor':'Valor Total Gasto'}, 
             inplace=True)
 booleanDictionary = {True: 'Sim', False: 'Não'}
 reelected = reelected.replace(booleanDictionary)
+reelected = reelected[['Nome do Parlamentar', 'Estado', 'Valor Total Gasto']]
+reelected['Valor Total Gasto'] = reelected['Valor Total Gasto'].map(locale.currency)
 
-print (reelected)
+#print (reelected)
+reelected.to_csv(r'totalSpendings.csv', index = None, header=True)

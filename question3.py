@@ -1,6 +1,8 @@
 #3- Dentre os estados da federação, os quatro congressistas que mais gastaram foram reeleitos?
 # -*- coding: utf-8 -*-
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+import locale
+locale.setlocale(locale.LC_ALL, 'pt_br.utf-8')
 
 df = pd.read_csv('2015-2019.csv')
 df = df.drop(columns=['nuCarteiraParlamentar', 'codLegislatura', 'txtFornecedor', 
@@ -47,8 +49,12 @@ reelected.rename(columns={'ideCadastro':'ID de Cadastro', 'txNomeParlamentar':'N
             inplace=True)
 booleanDictionary = {True: 'Sim', False: 'Não'}
 reelected = reelected.replace(booleanDictionary)
+reelected = reelected[['Nome do Parlamentar', 'Estado', 'Valor Total Gasto', 'Reeleito?']]
+reelected['Valor Total Gasto'] = reelected['Valor Total Gasto'].map(locale.currency)
+
 
 #print (reelected)
-tfile = open('stateReelection.txt', 'w+')
-tfile.write(reelected.to_string())
-tfile.close()
+#tfile = open('stateReelection.txt', 'w+')
+#tfile.write(reelected.to_string())
+#tfile.close()
+reelected.to_csv(r'stateReelection.csv', index = None, header=True)
